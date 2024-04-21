@@ -15,19 +15,45 @@ type ProductsRating {
   rate  Int
 }
 
-model Products {
+model Influencers {
   id          String         @id @default(auto()) @map("_id") @db.ObjectId
-  category    String
-  description String
-  image       String
-  price       Int
-  rating      ProductsRating
-  title       String
+  email    String @unique
+  tag_id String
+  name     String
+  social_link String
+  service_id String
 }
 
-model Users {
+model Brands {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
   email    String @unique
-  password String
+  tag_id String
   name     String
+}
+
+model Tags {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  name    String 
+  description String
+}
+
+model Services {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  name    String 
+  description String
+}
+
+model Payments {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  amount    String 
+  payment_method String
+  payment_date DateTime
+}
+
+model Collaborations {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  collab_detail    String 
+  influencer_id String
+  brand_id     String
+  payment_id String
 }

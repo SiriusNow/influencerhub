@@ -1,27 +1,32 @@
 export const SIDEBAR_NAV_ITEM = [
-	{
-		icon: "⚡",
-		title: "New In",
-		category: "featured",
-	},
-	{
-		icon: "🖥️",
-		title: "Electronics",
-		category: "electronics",
-	},
-	{
-		icon: "🎁",
-		title: "Jewelery",
-		category: "jewelery",
-	},
-	{
-		icon: "🙍‍♂️",
-		title: "Men's Clothing",
-		category: "men-clothing",
-	},
-	{
-		icon: "🚺",
-		title: "Women's Clothing",
-		category: "women-clothing",
-	},
+  {
+    icon: "⚡",
+    title: "Lifestyle",
+    category: "featured",
+  },
+  {
+    icon: "🏋️‍♂️",
+    title: "Fitness",
+    category: "electronics",
+  },
+  {
+    icon: "🎁",
+    title: "Cooking",
+    category: "jewelery",
+  },
+  {
+    icon: "💄",
+    title: "Beauty",
+    category: "men-clothing",
+  },
+  {
+    icon: "✈️ ",
+    title: "Travel",
+    category: "women-clothing",
+  },
+  {
+    icon: "💼",
+    title: "Business",
+    category: "women-clothing",
+  },
 ];
