@@ -12,7 +12,7 @@ type ServerResponse = {
 
 //fetch product by category
 const getComments = async (page: number): Promise<ServerResponse> => {
-  const response = await fetch(`${url}/api/brands`, {
+  const response = await fetch(`${url}/api/influencers`, {
     cache: "no-cache",
   });
   return response.json();
