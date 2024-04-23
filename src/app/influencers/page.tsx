@@ -1,21 +1,21 @@
-import Products from "@/components/Products";
+import Influencers from "@/components/Influencer";
 import SideNavbar from "@/components/SideNavbar";
 import { TComments, TProduct } from "@/types";
 import Link from "next/link";
 
 const url = process.env.API_URL as string;
 
-type ServerResponse = {
-  data: TComments[];
-  total: number;
-};
+// type ServerResponse = {
+//   data: TComments[];
+//   total: number;
+// };
 
 //fetch product by category
-const getComments = async (page: number): Promise<ServerResponse> => {
+const getComments = async (page: number): Promise<any> => {
   const response = await fetch(`${url}/api/influencers`, {
     cache: "no-cache",
   });
-  return response.json();
+  return await response.json();
 };
 
 export default async function Home({
@@ -105,8 +105,8 @@ export default async function Home({
         <h2 className="capitalize mb-8">All Influencers</h2>
         <section className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4">
           {/* {products.data.map((product) => ( */}
-          {products.map((product) => (
-            <Products product={product} key={product.id} />
+          {comm.map((influencer: any) => (
+            <Influencers influencer={influencer} key={influencer.id} />
           ))}
         </section>
         <div className="h-16 mt-6 py-4 flex items-center justify-center space-x-2">

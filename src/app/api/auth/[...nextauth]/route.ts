@@ -1,9 +1,5 @@
 import NextAuth from "next-auth";
 import { AuthOptions } from "next-auth";
-// import { nextauthOptions } from "./option";
-import { getSession } from "next-auth/react";
-import { signIn } from "next-auth/react";
-import { NextRequest, NextResponse } from "next/server";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import clientPromise from "@/lib/mongodb";
@@ -65,6 +61,20 @@ export const nextauthOptions: AuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user.id = token.uid;
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.uid = user.id;
+      }
+      return token;
+    },
+  },
   session: {
     strategy: "jwt",
   },

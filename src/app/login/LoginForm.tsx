@@ -15,7 +15,7 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
-  const [loginAsInfluencer, setLoginAsInfluencer] = useState(true);
+  // const [loginAsInfluencer, setLoginAsInfluencer] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAuthState({ ...authState, [e.target.name]: e.target.value });
@@ -30,6 +30,7 @@ export default function LoginForm() {
       email: authState.email,
       password: authState.password,
     });
+
     if (response?.error) {
       setLoading(false);
       setError(response?.error);
@@ -37,7 +38,7 @@ export default function LoginForm() {
     if (response?.error === null) {
       setLoading(false);
       toast.success("You successfully logged in");
-      router.push("/cart");
+      router.push("/collaborations");
     }
   };
 
@@ -84,7 +85,7 @@ export default function LoginForm() {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <div>
+          {/* <div>
             <input
               type="checkbox"
               id="loginAsInfluencer"
@@ -93,7 +94,7 @@ export default function LoginForm() {
               className="mr-2"
             />
             <label htmlFor="loginAsInfluencer">Login as Influencer</label>
-          </div>
+          </div> */}
           <button type="submit" className="submit-btn">
             {loading ? (
               <span className="flex items-center">

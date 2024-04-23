@@ -23,13 +23,13 @@ export default function LoginPage() {
               Sign Up
             </Link>
           </p>
-          <div className="flex justify-center mt-4">
+          {/* <div className="flex justify-center mt-4">
             <Link href={"/registerBrand"}>
               <button className="mx-2 px-4 py-2 rounded-full bg-black text-white">
                 Login as Brand
               </button>
             </Link>
-          </div>
+          </div> */}
           <LoginForm />
         </div>
       </div>

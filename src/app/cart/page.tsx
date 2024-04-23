@@ -10,7 +10,6 @@ export const metadata = {
 };
 export default async function Cart() {
   const session = await getServerSession(nextauthOptions);
-  console.log(session);
 
   return session ? <h1>Successs</h1> : redirect("/login");
 }

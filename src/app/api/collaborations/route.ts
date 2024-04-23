@@ -8,6 +8,7 @@ export async function GET(req: NextRequest) {
   try {
     const client = await clientPromise;
     const db = client.db("hub");
+
     const collaborations = await db
       .collection("collaborations")
       .find({})
@@ -30,12 +31,14 @@ export async function POST(req: NextRequest) {
       body;
 
     // Insert new collaboration
+    console.log(body);
+
     const result = await db.collection("collaborations").insertOne({
-      state,
-      collab_detail,
-      influencer_id,
-      brand_id,
-      payment_id,
+      state: state,
+      collab_detail: collab_detail,
+      influencer_id: influencer_id,
+      brand_id: brand_id,
+      payment_id: payment_id,
     });
 
     return NextResponse.json(result, { status: 201 });

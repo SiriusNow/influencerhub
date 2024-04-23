@@ -8,6 +8,7 @@ export async function GET(req: NextRequest) {
     const client = await clientPromise;
     const db = client.db("hub");
     const influencers = await db.collection("influencers").find({}).toArray();
+
     return NextResponse.json(influencers);
   } catch (error) {
     console.error(error);

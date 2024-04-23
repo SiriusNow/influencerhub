@@ -1,4 +1,4 @@
-import Products from "@/components/Products";
+import Products from "@/components/Influencer";
 import SideNavbar from "@/components/SideNavbar";
 import { TProduct } from "@/types";
 import Link from "next/link";
