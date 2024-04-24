@@ -6,7 +6,13 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Spin from "@/components/AnimateButton";
 
-export default function RegisterFormAsInfluencer() {
+interface Option {
+  _id: string;
+  name: string;
+  description: string;
+}
+
+export default function RegisterFormAsInfluencer({ services, tags }: any) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -22,6 +28,10 @@ export default function RegisterFormAsInfluencer() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAuthState({ ...authState, [e.target.name]: e.target.value });
+  };
+  const optionChnage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedTagId = e.target.value;
+    setAuthState({ ...authState, tag_id: selectedTagId });
   };
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -76,8 +86,7 @@ export default function RegisterFormAsInfluencer() {
 
         <div>
           <label htmlFor="email" className="text-base font-medium ">
-            {" "}
-            Email address{" "}
+            Email address
           </label>
           <div className="mt-2">
             <input
@@ -113,15 +122,20 @@ export default function RegisterFormAsInfluencer() {
             Service ID
           </label>
           <div className="mt-2">
-            <input
+            <select
               className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-              type="text"
-              placeholder="Service ID"
-              id="service_id"
-              name="service_id"
-              onChange={handleChange}
-              value={authState.service_id}
-            ></input>
+              id="tag_id"
+              name="tag_id"
+              onChange={optionChnage}
+              value={authState.tag_id}
+            >
+              <option value="">Select Tag</option>
+              {services.map((tag: any) => (
+                <option key={tag._id} value={tag._id}>
+                  {tag.name}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
@@ -130,15 +144,20 @@ export default function RegisterFormAsInfluencer() {
             Tag ID
           </label>
           <div className="mt-2">
-            <input
+            <select
               className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-              type="text"
-              placeholder="Tag ID"
               id="tag_id"
               name="tag_id"
-              onChange={handleChange}
+              onChange={optionChnage}
               value={authState.tag_id}
-            ></input>
+            >
+              <option value="">Select Tag</option>
+              {tags.map((tag: any) => (
+                <option key={tag._id} value={tag._id}>
+                  {tag.name}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 

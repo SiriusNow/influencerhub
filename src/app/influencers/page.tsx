@@ -25,67 +25,9 @@ export default async function Home({
 }) {
   const pageNumber = Number(searchParams.page);
   const comm = await getComments(pageNumber);
-  console.log(comm);
-
-  const products = [
-    {
-      id: "1",
-      title: "Gremix",
-      price: 0,
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      category: "YouTuber",
-      image: "	https://news.mn/wp-content/uploads/2020/01/gremix-2.jpg",
-      rating: {
-        rate: 4.5,
-        count: 50,
-      },
-    },
-    {
-      id: "2",
-      title: "Ganaa",
-      price: 0,
-      description:
-        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      category: "Meme maker",
-      image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Mol_ganaa.jpg/480px-Mol_ganaa.jpg",
-      rating: {
-        rate: 4.0,
-        count: 30,
-      },
-    },
-    {
-      id: "3",
-      title: "Javkhlan",
-      price: 0,
-      description:
-        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      category: "Singer",
-      image:
-        "https://cdns-images.dzcdn.net/images/cover/c4b16122ae94c055d2562d42e809be99/264x264.jpg",
-      rating: {
-        rate: 4.0,
-        count: 30,
-      },
-    },
-    {
-      id: "4",
-      title: "RokitBay",
-      price: 0,
-      description:
-        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      category: "Rapper",
-      image:
-        "	https://api.daavkatunes.mn/uploads/artist/5ad60172340d9146137903a2.jpg",
-      rating: {
-        rate: 4.0,
-        count: 30,
-      },
-    },
-  ];
 
   //   const productCount = products.total;
-  const productCount = products.length;
+  const productCount = comm.length;
 
   //defalut static limit
   const limit = 6;

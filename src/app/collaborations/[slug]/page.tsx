@@ -52,7 +52,7 @@ const CollabDetails = ({ data }: any) => {
             <h2 className="text-blue-500">${col.collab_detail}</h2>
             {/* <ProductRating value={collab.rating.rate!} /> */}
           </div>
-          <CartButton pd={col} />
+          {/* <CartButton pd={col} /> */}
           <div className="pb-6">
             <h4>Product influencer_id: </h4>
             <p>{col.influencer_id}</p>

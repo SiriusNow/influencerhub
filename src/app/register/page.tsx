@@ -1,11 +1,27 @@
 import Link from "next/link";
 import RegisterFormAsInfluencer from "./RegisterAsInf";
+import LoginForm from "../login/LoginForm";
+const url = process.env.API_URL!;
 
 export const metadata = {
   title: "Register As Influencer | InfluencerHUB",
   description: "Registration page. Create your account",
 };
-export default function RegisterPage() {
+const getServices = async (slug: string): Promise<any> => {
+  const response = await fetch(`${url}/api/services`, {
+    cache: "no-store",
+  });
+
+  return await response.json();
+};
+const getTags = async (slug: string): Promise<any> => {
+  const response = await fetch(`${url}/api/tags`, {
+    cache: "no-store",
+  });
+
+  return await response.json();
+};
+const RegisterPage = ({ services, tags }: any) => {
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-5 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
@@ -29,9 +45,17 @@ export default function RegisterPage() {
               </button>
             </Link>
           </div>
-          <RegisterFormAsInfluencer />
+          <RegisterFormAsInfluencer services={services} tags={tags} />
         </div>
       </div>
     </section>
   );
+};
+
+export default async function Login() {
+  const services = await getServices("s");
+  const tags = await getTags("s");
+  console.log(services);
+  console.log(tags);
+  return <RegisterPage services={services} tags={tags} />;
 }
