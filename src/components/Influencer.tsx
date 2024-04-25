@@ -7,7 +7,6 @@ import InfluencerImage from "@/assets/img/team-2-800x800.jpg";
 // 	influencer: TInfluencer;
 // };
 export default function Influencers({ influencer }: any) {
-  console.log(influencer);
   return (
     <Link href={`/influencers/${influencer._id}`}>
       <div className="relative h-[400px]   rounded-md group overflow-hidden">

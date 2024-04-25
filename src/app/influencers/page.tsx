@@ -8,10 +8,6 @@ import { redirect } from "next/navigation";
 
 const url = process.env.API_URL as string;
 
-// type ServerResponse = {
-//   data: TComments[];
-//   total: number;
-// };
 const getTags = async (slug: string): Promise<any> => {
   const response = await fetch(`${url}/api/tags`, {
     cache: "no-store",
@@ -47,7 +43,8 @@ export default async function Home({
   const comm = await getComments(pageNumber);
   const user = await getUser(session.user?.id);
   const tags = await getTags("");
-  if (!user) {
+
+  if (user !== null) {
     //influencer bol influencers page haragdah ystgui
     redirect("/collaborations");
   }
