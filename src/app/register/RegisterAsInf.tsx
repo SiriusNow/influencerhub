@@ -33,6 +33,10 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
     const selectedTagId = e.target.value;
     setAuthState({ ...authState, tag_id: selectedTagId });
   };
+  const optionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedTagId = e.target.value;
+    setAuthState({ ...authState, service_id: selectedTagId });
+  };
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -126,12 +130,18 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
               className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
               id="tag_id"
               name="tag_id"
-              onChange={optionChnage}
-              value={authState.tag_id}
+              onChange={optionChange}
+              value={authState.service_id}
             >
-              <option value="">Select Tag</option>
+              <option className="text-base font-medium" value="">
+                Select Tag
+              </option>
               {services.map((tag: any) => (
-                <option key={tag._id} value={tag._id}>
+                <option
+                  className="text-base font-medium"
+                  key={tag._id}
+                  value={tag._id}
+                >
                   {tag.name}
                 </option>
               ))}
@@ -151,9 +161,15 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
               onChange={optionChnage}
               value={authState.tag_id}
             >
-              <option value="">Select Tag</option>
+              <option className="text-base font-medium" value="">
+                Select Tag
+              </option>
               {tags.map((tag: any) => (
-                <option key={tag._id} value={tag._id}>
+                <option
+                  className="text-base font-medium"
+                  key={tag._id}
+                  value={tag._id}
+                >
                   {tag.name}
                 </option>
               ))}

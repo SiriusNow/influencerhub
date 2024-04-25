@@ -55,7 +55,5 @@ const RegisterPage = ({ services, tags }: any) => {
 export default async function Login() {
   const services = await getServices("s");
   const tags = await getTags("s");
-  console.log(services);
-  console.log(tags);
   return <RegisterPage services={services} tags={tags} />;
 }

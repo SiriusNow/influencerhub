@@ -1,7 +1,10 @@
 import Influencers from "@/components/Influencer";
 import SideNavbar from "@/components/SideNavbar";
 import { TComments, TProduct } from "@/types";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { nextauthOptions } from "../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
 const url = process.env.API_URL as string;
 
@@ -9,12 +12,24 @@ const url = process.env.API_URL as string;
 //   data: TComments[];
 //   total: number;
 // };
+const getTags = async (slug: string): Promise<any> => {
+  const response = await fetch(`${url}/api/tags`, {
+    cache: "no-store",
+  });
 
-//fetch product by category
+  return await response.json();
+};
 const getComments = async (page: number): Promise<any> => {
   const response = await fetch(`${url}/api/influencers`, {
     cache: "no-cache",
   });
+  return await response.json();
+};
+const getUser = async (id: any): Promise<any> => {
+  const response = await fetch(`${url}/api/influencers/${id}`, {
+    cache: "no-cache",
+  });
+  // const res = await response.json();
   return await response.json();
 };
 
@@ -24,7 +39,18 @@ export default async function Home({
   searchParams: { [key: string]: string };
 }) {
   const pageNumber = Number(searchParams.page);
+  const session = await getServerSession(nextauthOptions);
+
+  if (!session) {
+    redirect("/login");
+  }
   const comm = await getComments(pageNumber);
+  const user = await getUser(session.user?.id);
+  const tags = await getTags("");
+  if (!user) {
+    //influencer bol influencers page haragdah ystgui
+    redirect("/collaborations");
+  }
 
   //   const productCount = products.total;
   const productCount = comm.length;
@@ -41,7 +67,7 @@ export default async function Home({
   return (
     <section className="flex flex-col md:flex-row gap-2">
       <aside className="w-full md:w-[220px] shrink-0">
-        <SideNavbar />
+        <SideNavbar tags={tags} />
       </aside>
       <div className="flex-1 py-2">
         <h2 className="capitalize mb-8">All Influencers</h2>

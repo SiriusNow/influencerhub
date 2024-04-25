@@ -22,8 +22,6 @@ export async function GET(req: NextRequest, { params }: any) {
       .findOne({ _id: new ObjectId(id) });
     // .toArray();
 
-    console.log(influencers);
-
     return NextResponse.json(influencers);
   } catch (error) {
     console.error(error);
