@@ -31,6 +31,8 @@ export default async function Collaborations({
 
   const collabs = await getCollabs();
 
+  //uurt hamaaraltai collabuudiig haruulah heregtei
+
   if (!session) return redirect("/login");
 
   return (

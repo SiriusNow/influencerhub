@@ -68,12 +68,12 @@ export default async function Home({
       </aside>
       <div className="flex-1 py-2">
         <h2 className="capitalize mb-8">All Influencers</h2>
-        <section className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4">
+        <div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
           {/* {products.data.map((product) => ( */}
           {comm.map((influencer: any) => (
             <Influencers influencer={influencer} key={influencer.id} />
           ))}
-        </section>
+        </div>
         <div className="h-16 mt-6 py-4 flex items-center justify-center space-x-2">
           {pageNumber > 1 && (
             <Link href={`?page=${pageNumber - 1}`} className="px-4 py-2 ">

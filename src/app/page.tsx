@@ -59,8 +59,8 @@ const Services = () => (
               төгс шийдэл
             </p>
             <div className="relative flex flex-col sm:flex-row sm:space-x-4">
-              <a
-                href="#_"
+              <Link
+                href="/register"
                 className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
               >
                 Нэгдэх
@@ -77,7 +77,7 @@ const Services = () => (
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
-              </a>
+              </Link>
               <a
                 href="#_"
                 className="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600"
@@ -141,27 +141,20 @@ const Featured = () => (
           Хамтралын бүртгэл хөтлөх
         </h2>
         <p className="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-10 lg:text-lg">
-          Save time and money with our revolutionary services. We are the
-          leaders in the industry.
+          Хамтралын үйл явцыг харж өөрчилж сайжруулах боломжтой
         </p>
         <ul className="p-0 m-0 leading-6 border-0 border-gray-300">
           <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
             <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
               <span className="text-sm font-bold">✓</span>
             </span>{" "}
-            Automated task management workflow
+            Цагаа хэмнэх
           </li>
           <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
             <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
               <span className="text-sm font-bold">✓</span>
             </span>{" "}
-            Detailed analytics for your data
-          </li>
-          <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-            <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full">
-              <span className="text-sm font-bold">✓</span>
-            </span>{" "}
-            Some awesome integrations
+            Хэрэглэхэд ойлгомжтой
           </li>
         </ul>
       </div>
@@ -185,11 +178,11 @@ const Teams = () => (
           <div className="order-1 w-full px-3 lg:w-1/2 lg:order-0">
             <div className="w-full lg:max-w-md">
               <h2 className="mb-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl font-heading">
-                Jam-packed with all the tools you need to succeed!
+                Өөрийн сошиал хаягаараа давхар орлого олоорой
               </h2>
               <p className="mb-4 font-medium tracking-tight text-gray-400 xl:mb-6">
-                It's never been easier to build a business of your own. Our
-                tools will help you with the following:
+                Та бүртгүүлээд бусад брендүүд болон борлуулагчтай хамтрал үүсгэн
+                ажиллаарай:
               </p>
               <ul>
                 <li className="flex items-center py-2 space-x-4 xl:py-3">
@@ -208,7 +201,7 @@ const Teams = () => (
                     ></path>
                   </svg>
                   <span className="font-medium text-gray-500">
-                    Faster Processing and Delivery
+                    Өөрийн хаягаараа бүртгүүлээд
                   </span>
                 </li>
                 <li className="flex items-center py-2 space-x-4 xl:py-3">
@@ -227,7 +220,7 @@ const Teams = () => (
                     ></path>
                   </svg>
                   <span className="font-medium text-gray-500">
-                    Out of the Box Tracking and Monitoring
+                    Хамтрал үүсгээд сурталчилгаагаа хийгээд
                   </span>
                 </li>
                 <li className="flex items-center py-2 space-x-4 xl:py-3">
@@ -246,7 +239,7 @@ const Teams = () => (
                     ></path>
                   </svg>
                   <span className="font-medium text-gray-500">
-                    100% Protection and Security for Your App
+                    Нэмэлт орлого олоорой
                   </span>
                 </li>
               </ul>
