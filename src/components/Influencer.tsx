@@ -10,7 +10,7 @@ export default function Influencers({ influencer }: any) {
   return (
     <Link href={`/influencers/${influencer._id}`}>
       <div className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
+        <Link href={`/influencers/${influencer._id}`}>
           <Image
             src={InfluencerImage}
             height={400}
@@ -18,7 +18,7 @@ export default function Influencers({ influencer }: any) {
             //src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
             alt="Bonnie Avatar"
           />
-        </a>
+        </Link>
         <div className="p-5">
           <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
             <a href="#">{influencer.name}</a>

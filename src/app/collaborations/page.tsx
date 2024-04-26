@@ -38,7 +38,7 @@ export default async function Collaborations({
   return (
     <section className="py-2 ">
       <h2 className="capitalize mb-8">{searchParams.category}</h2>
-      <section className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4">
+      <section className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-2 gap-2">
         {collabs?.map((collab: any) => (
           <Collaboration collab={collab} key={collab._id} />
         ))}

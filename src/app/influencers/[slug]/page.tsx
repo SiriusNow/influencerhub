@@ -87,22 +87,22 @@ const InfluencerDetails = ({ influencer, user }: any) => {
         <div className="border rounded-md w-full h-[440px]">
           <Image
             src={InfluencerImage}
-            width={300}
-            height={400}
+            layout="responsive"
+            width={200}
+            height={380}
             alt="product"
-            className="w-full h-[440px] rounded-md object-center object-fill"
+            className="w-auto h-400 rounded-md object-center"
           />
         </div>
         <div className="space-y-5 flex flex-col justify-center">
           <h1>{influencer.name}</h1>
           <div className="flex justify-between">
-            <h2 className="text-blue-500">Total Followers: "gargaj irnee"</h2>
-            <h2 className="text-blue-500">${influencer.email}</h2>
+            <h2 className="text-blue-500">Total Followers: 22K</h2>
+            <h2 className="text-blue-500">{influencer.email}</h2>
             {/* <ProductRating value={Influencer.rating.rate!} /> */}
           </div>
-
           <div className="pb-6">
-            <h4>Product Description: </h4>
+            <h4>Influencer's service: </h4>
             <p>{influencer.social_link}</p>
           </div>
           <SendCollabButton influencer={influencer} user={user} />
