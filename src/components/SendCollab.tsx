@@ -26,7 +26,7 @@ const SendCollabButton = ({ influencer, user }: any) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          state: "pending",
+          state: "Pending",
           collab_detail: "",
           influencer_id: influencer._id,
           brand_id: user.id,

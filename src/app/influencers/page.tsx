@@ -25,7 +25,13 @@ const getUser = async (id: any): Promise<any> => {
   const response = await fetch(`${url}/api/influencers/${id}`, {
     cache: "no-cache",
   });
-  // const res = await response.json();
+  return await response.json();
+};
+const getService = async (): Promise<any> => {
+  const response = await fetch(`${url}/api/services`, {
+    cache: "no-store",
+  });
+
   return await response.json();
 };
 
@@ -43,6 +49,7 @@ export default async function Home({
   const comm = await getComments(pageNumber);
   const user = await getUser(session.user?.id);
   const tags = await getTags("");
+  const services = await getService();
 
   if (user !== null) {
     //influencer bol influencers page haragdah ystgui
@@ -71,7 +78,11 @@ export default async function Home({
         <div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
           {/* {products.data.map((product) => ( */}
           {comm.map((influencer: any) => (
-            <Influencers influencer={influencer} key={influencer.id} />
+            <Influencers
+              influencer={influencer}
+              key={influencer.id}
+              services={services}
+            />
           ))}
         </div>
         <div className="h-16 mt-6 py-4 flex items-center justify-center space-x-2">

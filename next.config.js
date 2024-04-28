@@ -12,6 +12,7 @@ const nextConfig = {
       "api.daavkatunes.mn",
       "static-cdn.jtvnw.net",
       "news.mn",
+      "scontent.cdninstagram.com",
     ],
   },
 };

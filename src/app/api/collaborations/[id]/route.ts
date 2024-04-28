@@ -16,8 +16,9 @@ export async function GET(req: NextRequest, { params }: any) {
     const { id } = params;
     const db = client.db("hub");
 
-    const collabs = await db
+    const collab = await db
       .collection("collaborations")
+
       .find({
         $or: [
           { _id: new ObjectId(id) },
@@ -26,16 +27,22 @@ export async function GET(req: NextRequest, { params }: any) {
         ],
       })
       .toArray();
-    return NextResponse.json(collabs);
+    if (collab.length != 0) {
+      return NextResponse.json(collab);
+    }
+
+    const collabs = await db.collection("collaborations").find({}).toArray();
+
+    const reqB = collabs.filter((service: any) => service.brand_id === id);
+
+    const reqA = collabs.filter((service: any) => service.influencer_id === id);
+
+    if (reqA.length == 0) {
+      return NextResponse.json(reqB);
+    }
+    return NextResponse.json(reqB);
   } catch (error) {
     console.error(error);
     return NextResponse.json(error, { status: 500 });
   }
 }
-
-// export async function GET(request, { params }) {
-//   const { id } = params;
-//   await connectMongoDB();
-//   const topic = await Topic.findOne({ _id: id });
-//   return NextResponse.json({ topic }, { status: 200 });
-// }

@@ -79,8 +79,6 @@ const getInsta = async (username: string): Promise<any> => {
 };
 
 const InfluencerDetails = ({ influencer, user }: any) => {
-  // console.log(follower);
-
   return (
     <section className=" pt-12 ">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-4 lg:gap-8">

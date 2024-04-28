@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Spin from "@/components/AnimateButton";
 
-export default function RegisterForm() {
+export default function RegisterForm({ tags }: any) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,10 @@ export default function RegisterForm() {
     password: "",
     password_confirmation: "",
   });
-
+  const optionChnage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedTagId = e.target.value;
+    setAuthState({ ...authState, tag_id: selectedTagId });
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAuthState({ ...authState, [e.target.name]: e.target.value });
   };
@@ -33,8 +36,6 @@ export default function RegisterForm() {
       },
       body: JSON.stringify(authState),
     });
-
-    console.log(response);
 
     if (response.status === 201 && response.ok === true) {
       setLoading(false);
@@ -90,15 +91,26 @@ export default function RegisterForm() {
             Tag ID
           </label>
           <div className="mt-2">
-            <input
+            <select
               className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-              type="text"
-              placeholder="Tag ID"
               id="tag_id"
               name="tag_id"
-              onChange={handleChange}
+              onChange={optionChnage}
               value={authState.tag_id}
-            ></input>
+            >
+              <option className="text-base font-medium" value="">
+                Select Tag
+              </option>
+              {tags.map((tag: any) => (
+                <option
+                  className="text-base font-medium"
+                  key={tag._id}
+                  value={tag._id}
+                >
+                  {tag.name}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
         <div>

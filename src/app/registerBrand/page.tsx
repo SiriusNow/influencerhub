@@ -1,13 +1,20 @@
 // "use client";
 import Link from "next/link";
 import RegisterForm from "./RegisterForm";
-import { useState } from "react";
+const url = process.env.API_URL!;
 
 export const metadata = {
-  title: "Register As Brand | InfluencerHUB",
+  title: "Register As Influencer | InfluencerHUB",
   description: "Registration page. Create your account",
 };
-export default function RegisterPage() {
+const getTags = async (slug: string): Promise<any> => {
+  const response = await fetch(`${url}/api/tags`, {
+    cache: "no-store",
+  });
+
+  return await response.json();
+};
+const RegisterPage = ({ tags }: any) => {
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-5 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
@@ -31,9 +38,14 @@ export default function RegisterPage() {
               </button>
             </Link>
           </div>
-          <RegisterForm />
+          <RegisterForm tags={tags} />
         </div>
       </div>
     </section>
   );
+};
+
+export default async function RegisterBrand() {
+  const tags = await getTags("s");
+  return <RegisterPage tags={tags} />;
 }
