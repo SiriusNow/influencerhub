@@ -8,12 +8,7 @@ export async function GET(req: NextRequest) {
   try {
     const client = await clientPromise;
     const db = client.db("hub");
-    const brands = await db
-      .collection("brands")
-      .find({})
-      //   .sort({ metacritic: -1 })
-      //   .limit(10)
-      .toArray();
+    const brands = await db.collection("brands").find({}).toArray();
     return NextResponse.json(brands);
   } catch (e) {
     console.error(e);
