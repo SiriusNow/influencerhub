@@ -74,8 +74,8 @@ export default async function Home({
         <SideNavbar tags={tags} />
       </aside>
       <div className="flex-1 py-2">
-        <h2 className="capitalize mb-8">All Influencers</h2>
-        <div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
+        <h2 className="capitalize mb-4">All Influencers</h2>
+        <div className="grid gap-2 mb-4 lg:mb-4 md:grid-cols-2">
           {/* {products.data.map((product) => ( */}
           {comm.map((influencer: any) => (
             <Influencers

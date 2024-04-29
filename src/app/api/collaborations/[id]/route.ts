@@ -19,16 +19,10 @@ export async function GET(req: NextRequest, { params }: any) {
     const collab = await db
       .collection("collaborations")
 
-      .find({
-        $or: [
-          { _id: new ObjectId(id) },
-          { brand_id: new ObjectId(id) },
-          { influencer_id: new ObjectId(id) },
-        ],
-      })
-      .toArray();
-    if (collab.length != 0) {
-      return NextResponse.json(collab);
+      .findOne({ _id: new ObjectId(id) });
+    // .toArray();
+    if (collab != null) {
+      return NextResponse.json([collab]);
     }
 
     const collabs = await db.collection("collaborations").find({}).toArray();
@@ -40,7 +34,7 @@ export async function GET(req: NextRequest, { params }: any) {
     if (reqA.length == 0) {
       return NextResponse.json(reqB);
     }
-    return NextResponse.json(reqB);
+    return NextResponse.json(reqA);
   } catch (error) {
     console.error(error);
     return NextResponse.json(error, { status: 500 });

@@ -400,7 +400,7 @@ const CollabDetailsInfluencer = ({ data }: any) => {
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5"></div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">
-                Total : Uniin dun
+                Total :
               </span>
             </div>
             {showButton ? <CollabChange col={col} state={col.state} /> : <></>}

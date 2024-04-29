@@ -56,6 +56,7 @@ const CollabChange = ({ col, state }: any) => {
           payment_id: "",
         }),
       });
+      console.log(response);
 
       if (response.status === 201 && response.ok === true) {
         setLoading(false);
@@ -94,8 +95,9 @@ const CollabChange = ({ col, state }: any) => {
           payment_id: "",
         }),
       });
+      console.log(response);
 
-      if (response.status === 201 && response.ok === true) {
+      if (response.status === 200 && response.ok === true) {
         setLoading(false);
         toast.success("Collab request sent successfully");
         router.replace("/collaborations");
@@ -117,7 +119,7 @@ const CollabChange = ({ col, state }: any) => {
   return (
     <button
       className="inline-flex w-full items-center justify-center rounded-md bg-green-700 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
-      onClick={state == "Review" ? handleClick : paymentClick}
+      onClick={state == "Review" ? paymentClick : handleClick}
     >
       {loading ? (
         <span className="flex items-center">
