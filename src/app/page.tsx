@@ -19,11 +19,7 @@ type ServerResponse = {
 // 	return await response.json();
 // };
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
-}) {
+export default async function Home() {
   return (
     <div>
       <Services />

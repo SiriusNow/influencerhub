@@ -4,11 +4,11 @@ import Link from "next/link";
 const SideNavbar = ({ tags }: any) => {
   return (
     <nav className="pl-3 mb-8">
-      <h1 className="pt-1 mb-4 md:mb-8">Tags</h1>
+      <h1 className="pt-1 mb-4 md:mb-8">Чиглэлүүд</h1>
       <ul className="flex flex-row  items-center md:items-start md:flex-col overflow-x-auto scrollbar-hide md:space-y-4  md:pl-2 w-full gap-x-4">
         {tags.map((item: any) => (
           <Link
-            href={`/collaborations/${item._id}`}
+            href={"#"}
             key={item._id}
             className=" w-full transition-all hover:scale-105 hover:text-blue-600 hover:font-medium  duration-100 dark:hover:text-emerald-400  cursor-pointer"
           >

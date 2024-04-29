@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto container py-16 xl:px-20 lg:px-12 sm:px-6 px-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 gap-4">
           <div className="flex flex-col flex-shrink-0">
-            <div className="dark:text-white">
+            <div className="dark:text-white flex items-center space-x-2">
               <Image
                 src="/img/ivengo.svg"
                 width={150}
@@ -14,13 +14,16 @@ export default function Footer() {
                 alt="logo"
                 className="w-10 md:w-8 inline"
               />
-              nfluencerHUB
+
+              <span className="justify-end text-xl font-bold ">
+                nfluencerHUB
+              </span>
             </div>
             <p className="text-sm leading-none text-gray-800 mt-4 dark:text-white">
               Copyright © 2024
             </p>
             <p className="text-sm leading-none text-gray-800 mt-4 dark:text-white">
-              All rights reserved
+              Бүх эрх хуулиар хамгаалагдсан
             </p>
             <div className="flex items-center gap-x-4 mt-12">
               <button
@@ -103,71 +106,55 @@ export default function Footer() {
           </div>
           <div className="sm:ml-0 ml-8 flex flex-col">
             <h2 className="text-base font-semibold leading-4 text-gray-800 dark:text-white">
-              Company
+              Мэдээлэл
             </h2>
             <a
               href="javascript:void(0)"
               className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
             >
-              Blog
+              Блог
             </a>
             <a
               href="javascript:void(0)"
               className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
             >
-              Pricing
-            </a>
-            <a
-              href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
-            >
-              About Us
-            </a>
-            <a
-              href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
-            >
-              Contact us
+              Бидний тухай
             </a>
           </div>
+
           <div className="flex flex-col">
             <h2 className="text-base font-semibold leading-4 text-gray-800 dark:text-white">
-              Support
+              Тусламж
             </h2>
             <a
               href="javascript:void(0)"
               className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
             >
-              Legal policy
+              Хуулийн бодлого
+            </a>
+
+            <a
+              href="javascript:void(0)"
+              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
+            >
+              Нууцлалийн бодлого
             </a>
             <a
               href="javascript:void(0)"
               className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
             >
-              Status policy
-            </a>
-            <a
-              href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
-            >
-              Privacy policy
-            </a>
-            <a
-              href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
-            >
-              Terms of service
+              Үйлчилгээний нөхцөл
             </a>
           </div>
           <div className="mt-10 lg:block hidden">
             <label className="text-xl font-medium leading-5 text-gray-800 dark:text-white">
-              Get updates
+              Товхимол авах
             </label>
             <div className="cursor-pointer flex items-center justify-between border border-gray-800 dark:border-white mt-4">
               <input
                 type="text"
                 className="text-base leading-4 p-4 w-full focus:outline-none text-gray-800 dark:text-white dark:placeholder-white dark:bg-gray-900 dark:border-white placeholder-gray-800"
-                placeholder="Enter your email"
+                placeholder="И-мэйлээ оруулна уу"
               />
               <button
                 aria-label="send"
@@ -192,17 +179,17 @@ export default function Footer() {
         </div>
         <div className="mt-10 lg:hidden">
           <label className="text-xl font-medium leading-5 text-gray-800 dark:text-white">
-            Get updates
+            Товхимол авах
           </label>
           <div className="flex items-center justify-between border border-gray-800 dark:border-white mt-4">
             <input
               type="text"
               className="text-base leading-4 p-4 relative z-0 w-full focus:outline-none text-gray-800 placeholder-gray-800 dark:text-white dark:placeholder-white dark:border-white dark:bg-gray-900"
-              placeholder="Enter your email"
+              placeholder="И-мэйлээ оруулна уу"
             />
             <button
               aria-label="send"
-              className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer mr-4 cursor-pointer relative z-40"
+              className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 mr-4 cursor-pointer relative z-40"
             >
               <svg
                 className="fill-current text-gray-800 hover:text-gray-500 dark:text-white dark:hover:text-gray-200"

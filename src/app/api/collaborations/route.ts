@@ -27,18 +27,26 @@ export async function POST(req: NextRequest) {
     const client = await clientPromise;
     const db = client.db("hub");
     const body = await req.json();
-    const { state, collab_detail, influencer_id, brand_id, payment_id }: any =
-      body;
+    const {
+      state,
+      collab_detail,
+      influencer_id,
+      brand_id,
+      collab_salary,
+      payment_id,
+      collab_works,
+    }: any = body;
 
     // Insert new collaboration
-    console.log(body);
 
     const result = await db.collection("collaborations").insertOne({
       state: state,
       collab_detail: collab_detail,
       influencer_id: influencer_id,
       brand_id: brand_id,
+      collab_salary: collab_salary,
       payment_id: payment_id,
+      collab_works: [],
     });
 
     return NextResponse.json(result, { status: 201 });
@@ -60,7 +68,9 @@ export async function PUT(req: NextRequest) {
       collab_detail,
       influencer_id,
       brand_id,
+      collab_salary,
       payment_id,
+      collab_works,
     }: any = body;
 
     // Update collaboration by ID
@@ -72,7 +82,9 @@ export async function PUT(req: NextRequest) {
           collab_detail,
           influencer_id,
           brand_id,
+          collab_salary,
           payment_id,
+          collab_works,
         },
       }
     );

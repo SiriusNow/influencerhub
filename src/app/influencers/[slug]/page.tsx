@@ -14,10 +14,6 @@ const url = process.env.API_URL!;
 const defaultImage =
   "https://media.istockphoto.com/id/1341046662/vector/picture-profile-icon-human-or-people-sign-and-symbol-for-template-design.jpg?s=612x612&w=0&k=20&c=A7z3OK0fElK3tFntKObma-3a7PyO8_2xxW0jtmjzT78=";
 
-// type Props = {
-// 	product: TProduct;
-// };
-
 const getInfluencerCollab = async (slug: string): Promise<any> => {
   const response = await fetch(`${url}/api/influencers/${slug}`, {
     cache: "no-store",
@@ -115,7 +111,7 @@ const InfluencerDetails = ({ influencer, user, services }: any) => {
               viewBox="0 0 20 20"
             >
               <path d="M9 12H1v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-8v2H9v-2zm0-1H0V5c0-1.1.9-2 2-2h4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1h4a2 2 0 0 1 2 2v6h-9V9H9v2zm3-8V2H8v1h4z" />
-            </svg>{" "}
+            </svg>
             {influencer.email}
           </p>
           <p className="pt-2 text-gray-600 text-xs lg:text-sm flex items-center justify-center lg:justify-start">

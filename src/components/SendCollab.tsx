@@ -16,9 +16,13 @@ const SendCollabButton = ({ influencer, user }: any) => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [desc, setDesc] = useState("");
+  const [salary, setSalary] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDesc(e.target.value);
+  };
+  const handleChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSalary(e.target.value);
   };
 
   const handleClick = async () => {
@@ -35,14 +39,14 @@ const SendCollabButton = ({ influencer, user }: any) => {
           collab_detail: desc,
           influencer_id: influencer._id,
           brand_id: user.id,
+          collab_salary: salary,
           payment_id: "",
         }),
       });
-      console.log(response);
 
       if (response.status === 201 && response.ok === true) {
         setLoading(false);
-        toast.success("Collab request sent successfully");
+        toast.success("Хүсэлт амжилттай илгээгдлээ");
         router.replace("/collaborations");
       } else {
         const error = await response.json();
@@ -54,7 +58,7 @@ const SendCollabButton = ({ influencer, user }: any) => {
     } catch (error) {
       console.error(error);
       setLoading(false);
-      setError("An error occurred. Please try again later.");
+      setError("Алдаа rарлаа дахин оролдоно уу");
     } finally {
       setLoading(false);
     }
@@ -62,18 +66,34 @@ const SendCollabButton = ({ influencer, user }: any) => {
   return (
     <>
       <div className="py-4">
-        <label htmlFor="username" className="text-base font-medium py-4">
-          Collaboration details:
+        <label htmlFor="text" className="text-base font-medium py-4">
+          Хийх ажлууд:
         </label>
         <div className="mt-2">
           <input
             className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
             type="text"
-            placeholder="Collaboration details:"
+            placeholder="Энэ хамтралаар ямар ажил хийлгэхээ бичнэ үү?"
             id="text"
             name="text"
             onChange={handleChange}
             value={desc}
+          />
+        </div>
+      </div>
+      <div className="py-4">
+        <label htmlFor="username" className="text-base font-medium py-4">
+          Ажлын хөлс:
+        </label>
+        <div className="mt-2">
+          <input
+            className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+            type="text"
+            placeholder="Нөлөөлөгчид өгөх ажлын хөлсийг оруулна уу"
+            id="text"
+            name="text"
+            onChange={handleChanges}
+            value={salary}
           />
         </div>
       </div>
@@ -84,10 +104,10 @@ const SendCollabButton = ({ influencer, user }: any) => {
         {loading ? (
           <span className="flex items-center">
             <Spin />
-            Sending...
+            Илгээж байна...
           </span>
         ) : (
-          "Send Collab Request"
+          "Хамтрах хүсэлт явуулах"
         )}
       </button>
     </>

@@ -41,9 +41,8 @@ const getBrand = async (id: string): Promise<any> => {
 
 const CollabDetailsBrand = ({ data }: any) => {
   const { col, inf, brand } = data;
-  console.log(col, inf, brand);
   let showButton = true;
-  if (col.state == "Pending" || col.state == "Working") {
+  if (col.state == "Pending" || col.state == "Working" || col.state == "Done") {
     showButton = false;
   }
 
@@ -55,69 +54,14 @@ const CollabDetailsBrand = ({ data }: any) => {
           <States state={col.state} />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">
-              BRAND NAME : {brand.name}
+              Борлуулагч : {brand.name}
             </h2>
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-              Influencer : {inf.name}
+              Нөлөөлөгч : {inf.name}
             </h1>
             <div className="flex mb-4">
               <span className="flex items-center">
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                </svg>
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                </svg>
-                <span className="text-gray-600 ml-3">4 Reviews</span>
+                <span className="text-gray-600 ml-3">4 Саналтай</span>
               </span>
               <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
                 <a className="text-gray-500">
@@ -158,15 +102,31 @@ const CollabDetailsBrand = ({ data }: any) => {
                 </a>
               </span>
             </div>
-            <p className="leading-relaxed">
-              Collaboration details: {col.details}
-            </p>
-            <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5"></div>
-            <div className="flex">
-              <span className="title-font font-medium text-2xl text-gray-900">
-                Total : Uniin dun
+            <p className="leading-relaxed">Хийх ажлууд: {col.collab_detail}</p>
+            <div className="flex mb-4">
+              <span className="title-font font-medium text-2xl text-gray-900 mb-2">
+                Үнийн дүн : {col.collab_salary}
               </span>
             </div>
+            <div className="mt-4">
+              Хийгдсэн ажлууд:
+              <ul className="divide-y divide-gray-200">
+                {col.collab_works?.map((work: any, index: any) => (
+                  <li key={index} className="py-2">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-gray-800 font-medium">
+                          {work.name}
+                        </h3>
+                        <p className="text-gray-500">{work.work_link}</p>
+                      </div>
+                      {/* Add any action buttons here */}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             {showButton ? <CollabChange col={col} state={col.state} /> : <></>}
           </div>
         </div>
@@ -178,7 +138,11 @@ const CollabDetailsBrand = ({ data }: any) => {
 const CollabDetailsInfluencer = ({ data }: any) => {
   const { col, inf, brand } = data;
   let showButton = true;
-  if (col.state == "Collaboration" || col.state == "Review") {
+  if (
+    col.state == "Collaboration" ||
+    col.state == "Review" ||
+    col.state == "Done"
+  ) {
     showButton = false;
   }
   return (
@@ -291,69 +255,14 @@ const CollabDetailsInfluencer = ({ data }: any) => {
           <States state={col.state} />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">
-              BRAND NAME : {brand.name}
+              Нөлөөлөгч : {inf.name}
             </h2>
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-              Influencer Name : {inf.name}
+              Борлуулагч: {brand.name}
             </h1>
             <div className="flex mb-4">
               <span className="flex items-center">
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                </svg>
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                </svg>
-                <span className="text-gray-600 ml-3">4 Reviews</span>
+                <span className="text-gray-600 ml-3">4 Саналтай</span>
               </span>
               <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
                 <a className="text-gray-500">
@@ -394,15 +303,31 @@ const CollabDetailsInfluencer = ({ data }: any) => {
                 </a>
               </span>
             </div>
-            <p className="leading-relaxed">
-              Collaboration details: {col.details}
-            </p>
-            <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5"></div>
+            <p className="leading-relaxed">Хийх ажлууд: {col.collab_detail}</p>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">
-                Total :
+                Үнийн дүн : {col.collab_salary}
               </span>
             </div>
+            <div className="mt-4">
+              Хийгдсэн ажлууд:
+              <ul className="divide-y divide-gray-200">
+                {col.collab_works?.map((work: any, index: any) => (
+                  <li key={index} className="py-2">
+                    <div className=" items-center justify-between">
+                      <div>
+                        <h3 className="text-gray-800 font-medium">
+                          {work.name}
+                        </h3>
+                        <p className="text-gray-500">{work.work_link}</p>
+                      </div>
+                      {/* Add any action buttons here */}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             {showButton ? <CollabChange col={col} state={col.state} /> : <></>}
           </div>
         </div>

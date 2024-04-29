@@ -15,6 +15,16 @@ const CollabChange = ({ col, state }: any) => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [workName, setWorkName] = useState("");
+  const [workLink, setWorkLink] = useState("");
+
+  const handleWorkNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWorkName(e.target.value);
+  };
+  const handleWorkLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWorkLink(e.target.value);
+  };
+  let showWorkButton = false;
   let states = [
     "Pending",
     "Collaboration",
@@ -26,23 +36,28 @@ const CollabChange = ({ col, state }: any) => {
   let setText = states[states.indexOf(state) + 1];
   let text = "";
   if (state == "Pending") {
-    text = "Accept Request";
+    text = "Хүсэлтийг хүлээн авах";
   }
   if (state == "Collaboration") {
-    text = "Start Working";
+    text = "Ажлыг эхлүүлэх";
   }
   if (state == "Working") {
-    text = "Done Working";
+    showWorkButton = true;
+    text = "Ажиллаж дууссан";
   }
   if (state == "Review") {
-    text = "Done Review & Pay";
+    text = "Шалгаад Шилжүүллээ";
   }
+  if (state == "Payment") {
+    text = "Ажил дууссан";
+  }
+  const handleAddWork = async () => {
+    let works = col.collab_works;
 
-  const paymentClick = async () => {
-    setLoading(true);
+    works.push({ name: workName, work_link: workLink });
 
     try {
-      const response = await fetch("/api/payment", {
+      const response = await fetch("/api/collaborations/", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -54,27 +69,22 @@ const CollabChange = ({ col, state }: any) => {
           influencer_id: col.influencer_id,
           brand_id: col.brand_id,
           payment_id: "",
+          collab_works: works,
         }),
       });
-      console.log(response);
 
-      if (response.status === 201 && response.ok === true) {
-        setLoading(false);
-        toast.success("Collab request sent successfully");
-        router.replace("/collaborations");
+      if (response.status === 200 && response.ok === true) {
+        toast.success("Ажил амжилттай нэмэгдлээ");
       } else {
         const error = await response.json();
         if (error) {
-          setLoading(false);
           setError(error);
         }
       }
     } catch (error) {
       console.error(error);
-      setLoading(false);
       setError("An error occurred. Please try again later.");
     } finally {
-      setLoading(false);
     }
   };
   const handleClick = async () => {
@@ -92,14 +102,14 @@ const CollabChange = ({ col, state }: any) => {
           collab_detail: col.collab_detail,
           influencer_id: col.influencer_id,
           brand_id: col.brand_id,
+          collab_works: col.collab_works,
           payment_id: "",
         }),
       });
-      console.log(response);
 
       if (response.status === 200 && response.ok === true) {
         setLoading(false);
-        toast.success("Collab request sent successfully");
+        toast.success("Дараагийн үе шат руу шилжлээ");
         router.replace("/collaborations");
       } else {
         const error = await response.json();
@@ -117,19 +127,66 @@ const CollabChange = ({ col, state }: any) => {
     }
   };
   return (
-    <button
-      className="inline-flex w-full items-center justify-center rounded-md bg-green-700 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
-      onClick={state == "Review" ? paymentClick : handleClick}
-    >
-      {loading ? (
-        <span className="flex items-center">
-          <Spin />
-          Sending...
-        </span>
+    <div>
+      {showWorkButton ? (
+        <div className="grid gap-4 mb-8">
+          <span>Хийсэн ажлаа нэмэх</span>
+          <div>
+            <label
+              htmlFor="workName"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Ажлын тайлбар:
+            </label>
+            <input
+              type="text"
+              id="workName"
+              name="Ажлын тайлбар"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              onChange={handleWorkNameChange}
+              value={workName}
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="workLink"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Ажлын линк
+            </label>
+            <input
+              type="text"
+              id="workLink"
+              name="Ажлын линк"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              onChange={handleWorkLinkChange}
+              value={workLink}
+            />
+          </div>
+          <button
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={handleAddWork}
+          >
+            Нэмэх
+          </button>
+        </div>
       ) : (
-        `${text}`
+        <></>
       )}
-    </button>
+      <button
+        className="inline-flex w-full items-center justify-center rounded-md bg-green-700 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+        onClick={handleClick}
+      >
+        {loading ? (
+          <span className="flex items-center">
+            <Spin />
+            Илгээж байна...
+          </span>
+        ) : (
+          `${text}`
+        )}
+      </button>
+    </div>
   );
 };
 

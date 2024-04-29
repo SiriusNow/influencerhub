@@ -53,7 +53,7 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
 
       if (response.status === 201 && response.ok === true) {
         setLoading(false);
-        toast.success("User created successfully");
+        toast.success("Нөлөөлөгч амжилттай бүртгэгдлээ");
         router.replace("/login");
       } else {
         const error = await response.json();
@@ -65,7 +65,7 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
     } catch (error) {
       console.error(error);
       setLoading(false);
-      setError("An error occurred. Please try again later.");
+      setError("Алдаа гарлаа. Дахин оролдоно уу");
     }
   };
   return (
@@ -73,13 +73,13 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
       <div className="space-y-5">
         <div>
           <label htmlFor="username" className="text-base font-medium ">
-            Full Name
+            Таны нэр
           </label>
           <div className="mt-2">
             <input
               className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
               type="text"
-              placeholder="Full Name"
+              placeholder="Та нэрээ оруулна уу"
               id="name"
               name="name"
               onChange={handleChange}
@@ -90,7 +90,7 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
 
         <div>
           <label htmlFor="email" className="text-base font-medium ">
-            Email address
+            И-мэйл хаяг
           </label>
           <div className="mt-2">
             <input
@@ -106,7 +106,7 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
         </div>
         <div>
           <label htmlFor="social_link" className="text-base font-medium">
-            Social Link
+            Сошиал хаяг (Instagram)
           </label>
           <div className="mt-2">
             <input
@@ -123,7 +123,7 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
 
         <div>
           <label htmlFor="service_id" className="text-base font-medium">
-            Service ID
+            Ямар үйлчилгээ үзүүлэх вэ
           </label>
           <div className="mt-2">
             <select
@@ -134,7 +134,7 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
               value={authState.service_id}
             >
               <option className="text-base font-medium" value="">
-                Select Tag
+                үйлчилгээ сонгох
               </option>
               {services.map((tag: any) => (
                 <option
@@ -151,7 +151,7 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
 
         <div>
           <label htmlFor="tag_id" className="text-base font-medium">
-            Tag ID
+            Таны хаяг аль бүлэгт хамаарах вэ
           </label>
           <div className="mt-2">
             <select
@@ -162,7 +162,7 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
               value={authState.tag_id}
             >
               <option className="text-base font-medium" value="">
-                Select Tag
+                бүлэг сонгох
               </option>
               {tags.map((tag: any) => (
                 <option
@@ -180,7 +180,7 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
         <div>
           <div className="flex items-center justify-between">
             <label htmlFor="password" className="text-base font-medium ">
-              Password
+              Нууц үг
             </label>
           </div>
           <div className="mt-2">
@@ -198,7 +198,7 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
         <div>
           <div className="flex items-center justify-between">
             <label htmlFor="confirmPass" className="text-base font-medium ">
-              Confirm Password{" "}
+              Нууц үг дахин оруулах
             </label>
           </div>
           <div className="mt-2">
@@ -226,10 +226,10 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
             {loading ? (
               <span className="flex items-center">
                 <Spin />
-                Creating...
+                Бүртгэж байна...
               </span>
             ) : (
-              "Create Account"
+              "Шинэ Нөлөөлөгч болох"
             )}
             <ArrowRightIcon className="ml-2 w-5 h-5" />
           </button>

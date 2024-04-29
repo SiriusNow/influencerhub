@@ -60,7 +60,7 @@ export default async function Home({
   const productCount = comm.length;
 
   //defalut static limit
-  const limit = 6;
+  const limit = 12;
 
   const pageCount = Math.ceil(productCount / limit);
 
@@ -74,7 +74,7 @@ export default async function Home({
         <SideNavbar tags={tags} />
       </aside>
       <div className="flex-1 py-2">
-        <h2 className="capitalize mb-4">All Influencers</h2>
+        <h2 className="capitalize mb-4">Бүх Нөлөөлөгчид</h2>
         <div className="grid gap-2 mb-4 lg:mb-4 md:grid-cols-2">
           {/* {products.data.map((product) => ( */}
           {comm.map((influencer: any) => (

@@ -28,7 +28,9 @@ export default function RootLayout({
       <body className="bg-slate-200 dark:bg-gray-700">
         <Providers>
           <Navbar />
-          <main className="container mx-auto min-h-[510px]">{children}</main>
+          <main className="container mx-auto min-h-[510px] mb-8">
+            {children}
+          </main>
           <Footer />
         </Providers>
       </body>

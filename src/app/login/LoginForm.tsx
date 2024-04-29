@@ -37,7 +37,7 @@ export default function LoginForm() {
     }
     if (response?.error === null) {
       setLoading(false);
-      toast.success("You successfully logged in");
+      toast.success("Сайн байна уу?");
       router.push("/collaborations");
     }
   };
@@ -52,13 +52,13 @@ export default function LoginForm() {
       <div className="space-y-5">
         <div>
           <label htmlFor="email" className="text-base font-medium">
-            Email address
+            И-мэйл хаяг
           </label>
           <div className="mt-2">
             <input
               className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
               type="email"
-              placeholder="Email"
+              placeholder="И-мэйл хаяг эсвэл гар утасны дугаар"
               id="email"
               name="email"
               onChange={handleChange}
@@ -69,7 +69,7 @@ export default function LoginForm() {
         <div>
           <div className="flex items-center justify-between">
             <label htmlFor="password" className="text-base font-medium">
-              Password
+              Нууц үг
             </label>
           </div>
           <div className="mt-2">
@@ -99,10 +99,10 @@ export default function LoginForm() {
             {loading ? (
               <span className="flex items-center">
                 <Spin />
-                Logging...
+                Нэвтэрч байна...
               </span>
             ) : (
-              "Log In"
+              "Нэвтрэх"
             )}
             <ArrowRightIcon className="ml-2 w-5 h-5" />
           </button>
