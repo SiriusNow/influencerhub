@@ -56,23 +56,6 @@ export async function POST(req: NextRequest) {
     console.error(error);
     return NextResponse.json(error, { status: 500 });
   }
-  // try {
-  //   const client = await clientPromise;
-  //   const db = client.db("hub");
-  //   const body = await req.json();
-  //   const { name, email, tag_id }: any = body;
-  //   // Insert new brand
-  //   const result = await db.collection("brands").insertOne({
-  //     name,
-  //     email,
-  //     tag_id,
-  //   });
-
-  //   return NextResponse.json(result, { status: 201 });
-  // } catch (error) {
-  //   console.error(error);
-  //   return NextResponse.json(error, { status: 500 });
-  // }
 }
 
 // Define the DELETE method

@@ -5,8 +5,7 @@ import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Cart | InfluencerHUB",
-  description:
-    "It shows all the item that you added into your cart to buy products",
+  description: "Description",
 };
 export default async function Cart() {
   const session = await getServerSession(nextauthOptions);
