@@ -15,21 +15,16 @@ export async function POST(req: NextRequest) {
       password,
       password_confirmation,
     } = await req.json();
-
     if (!name || !email || !password) {
       return NextResponse.json("All fields are required", { status: 400 });
     }
-
     if (password !== password_confirmation) {
       return NextResponse.json("Password does not match", { status: 400 });
     }
-
     const user = await db.collection("influencers").findOne({ email: email });
-
     if (user) {
       return NextResponse.json("Email is already taken", { status: 302 });
     }
-
     // Making hashed password
     const hashedPass = await bcrypt.hash(password, 10);
 
