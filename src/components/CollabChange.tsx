@@ -8,15 +8,31 @@ import Spin from "./AnimateButton";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-// type ButtonProps = {
-// 	pd: TProduct;
-// };
-const CollabChange = ({ col, state }: any) => {
+const sendEmail = async (message: any, email: any) => {
+  try {
+    const response = await fetch("/api/mail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "Influencer HUB",
+        email: email,
+        message: message,
+      }),
+    });
+  } catch (error) {
+    console.error(error);
+  } finally {
+  }
+};
+const CollabChange = ({ data, state }: any) => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [workName, setWorkName] = useState("");
   const [workLink, setWorkLink] = useState("");
+  const { col, inf, brand } = data;
 
   const handleWorkNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWorkName(e.target.value);
@@ -106,6 +122,8 @@ const CollabChange = ({ col, state }: any) => {
           payment_id: "",
         }),
       });
+      await sendEmail(`${setText} үе шат рүү шилжлээ`, inf.email);
+      await sendEmail(`${setText} үе шат рүү шилжлээ`, brand.email);
 
       if (response.status === 200 && response.ok === true) {
         setLoading(false);

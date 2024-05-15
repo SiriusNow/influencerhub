@@ -12,12 +12,32 @@ import Link from "next/link";
 // type ButtonProps = {
 // 	pd: TProduct;
 // };
-const AcceptButton = ({ col, user }: any) => {
+const sendEmail = async (message: any, email: any) => {
+  try {
+    const response = await fetch("/api/mail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "Influencer HUB",
+        email: email,
+        message: message,
+      }),
+    });
+  } catch (error) {
+    console.error(error);
+  } finally {
+  }
+};
+
+const AcceptButton = ({ data, user }: any) => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loadingAccept, setLoadingAccept] = useState(false);
   const [loading, setLoading] = useState(false);
-  const state = col.state;
+  const { influencer, brand, collab } = data;
+  const state = collab.state;
   let states = [
     "Pending",
     "Collaboration",
@@ -41,25 +61,6 @@ const AcceptButton = ({ col, user }: any) => {
     text = "Шалгаад Шилжүүллээ";
   }
 
-  const sendEmail = async (message: any, email: any) => {
-    try {
-      const response = await fetch("/api/mail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: "Influencer HUB",
-          email: email,
-          message: message,
-        }),
-      });
-    } catch (error) {
-      console.error(error);
-    } finally {
-    }
-  };
-
   const handleClick = async () => {
     setLoadingAccept(true);
 
@@ -70,17 +71,19 @@ const AcceptButton = ({ col, user }: any) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: col._id,
+          id: collab._id,
           state: setText,
-          collab_detail: col.collab_detail,
-          influencer_id: col.influencer_id,
-          brand_id: col.brand_id,
-          collab_salary: col.collab_salary,
-          collab_works: col.collab_works,
+          collab_detail: collab.collab_detail,
+          influencer_id: collab.influencer_id,
+          brand_id: collab.brand_id,
+          collab_salary: collab.collab_salary,
+          collab_works: collab.collab_works,
           payment_id: "",
         }),
       });
-      sendEmail("", email);
+
+      await sendEmail(`${setText} үе шат рүү шилжлээ`, influencer.email);
+      await sendEmail(`${setText} үе шат рүү шилжлээ`, brand.email);
 
       if (response.status === 200 && response.ok === true) {
         setLoadingAccept(false);
@@ -110,15 +113,20 @@ const AcceptButton = ({ col, user }: any) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: col._id,
+          id: collab._id,
           state: setText,
-          collab_detail: col.collab_detail,
-          influencer_id: col.influencer_id,
-          brand_id: col.brand_id,
-          collab_works: col.collab_works,
+          collab_detail: collab.collab_detail,
+          influencer_id: collab.influencer_id,
+          brand_id: collab.brand_id,
+          collab_works: collab.collab_works,
           payment_id: "",
         }),
       });
+
+      await sendEmail(
+        `Нөлөөлөгч: ${influencer.name} Таны хүсэлтийг хүлээн авсангүй. Дахин хүсэлт явуулна уу`,
+        brand.email
+      );
 
       if (response.status === 200 && response.ok === true) {
         setLoading(false);
@@ -174,7 +182,7 @@ const AcceptButton = ({ col, user }: any) => {
 
   return (
     <Link
-      href={`/collaborations/${col._id}`}
+      href={`/collaborations/${collab._id}`}
       className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     >
       Дэлгэрэнгүй

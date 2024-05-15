@@ -8,9 +8,24 @@ import Spin from "./AnimateButton";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-// type ButtonProps = {
-// 	pd: TProduct;
-// };
+const sendEmail = async (message: any, email: any) => {
+  try {
+    const response = await fetch("/api/mail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "Influencer HUB",
+        email: email,
+        message: message,
+      }),
+    });
+  } catch (error) {
+    console.error(error);
+  } finally {
+  }
+};
 const SendCollabButton = ({ influencer, user }: any) => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -43,6 +58,11 @@ const SendCollabButton = ({ influencer, user }: any) => {
           payment_id: "",
         }),
       });
+
+      await sendEmail(
+        `Нөлөөлөгч тань руу хүсэлт ирлээ. ${desc} ажлуудыг ${salary} хөлсөөр хийгдэнэ.`,
+        influencer.email
+      );
 
       if (response.status === 201 && response.ok === true) {
         setLoading(false);

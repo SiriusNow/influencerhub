@@ -20,7 +20,7 @@ export default function Collaboration({ data, user }: any) {
       <td className="px-6 py-4 whitespace-nowrap">{collab.collab_salary}</td>
       <td className="px-6 py-4 whitespace-nowrap">{collab.state}</td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-        <AcceptButton col={collab} user={user} />
+        <AcceptButton data={data} user={user} />
       </td>
     </tr>
   );

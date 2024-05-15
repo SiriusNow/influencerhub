@@ -127,7 +127,11 @@ const CollabDetailsBrand = ({ data }: any) => {
               </ul>
             </div>
 
-            {showButton ? <CollabChange col={col} state={col.state} /> : <></>}
+            {showButton ? (
+              <CollabChange data={data} state={col.state} />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
@@ -328,7 +332,11 @@ const CollabDetailsInfluencer = ({ data }: any) => {
               </ul>
             </div>
 
-            {showButton ? <CollabChange col={col} state={col.state} /> : <></>}
+            {showButton ? (
+              <CollabChange data={data} state={col.state} />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
