@@ -10,15 +10,6 @@ type ServerResponse = {
   total: number;
 };
 
-//fetch product by category
-// const getProducts = async (page: number): Promise<ServerResponse> => {
-// 	const response = await fetch(`${url}/api/products?page=${page}`, {
-// 		cache: "no-cache",
-// 	});
-
-// 	return await response.json();
-// };
-
 export default async function Home() {
   return (
     <div>

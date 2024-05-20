@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth";
 import { nextauthOptions } from "@/app/api/auth/[...nextauth]/route";
 import States from "@/components/States";
 import CollabChange from "@/components/CollabChange";
+import Link from "next/link";
 
 const url = process.env.API_URL!;
 
@@ -42,7 +43,12 @@ const getBrand = async (id: string): Promise<any> => {
 const CollabDetailsBrand = ({ data }: any) => {
   const { col, inf, brand } = data;
   let showButton = true;
-  if (col.state == "Pending" || col.state == "Working" || col.state == "Done") {
+  if (
+    col.state == "Pending" ||
+    col.state == "Working" ||
+    col.state == "Done" ||
+    col.state == "Payment"
+  ) {
     showButton = false;
   }
 
@@ -102,30 +108,34 @@ const CollabDetailsBrand = ({ data }: any) => {
                 </a>
               </span>
             </div>
-            <p className="leading-relaxed">Хийх ажлууд: {col.collab_detail}</p>
+            <p className="text-sm title-font text-gray-500 tracking-widest">
+              Хийх ажлууд: {col.collab_detail}
+            </p>
             <div className="flex mb-4">
               <span className="title-font font-medium text-2xl text-gray-900 mb-2">
                 Үнийн дүн : {col.collab_salary}
               </span>
             </div>
-            <div className="mt-4">
-              Хийгдсэн ажлууд:
-              <ul className="divide-y divide-gray-200">
-                {col.collab_works?.map((work: any, index: any) => (
-                  <li key={index} className="py-2">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-gray-800 font-medium">
-                          {work.name}
-                        </h3>
-                        <p className="text-gray-500">{work.work_link}</p>
-                      </div>
-                      {/* Add any action buttons here */}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {col.collab_works && col.collab_works.length > 0 && (
+              <div className="mt-4">
+                <p className="text-sm title-font text-gray-500 tracking-widest">
+                  Хийгдсэн ажлууд:
+                </p>
+
+                <ul className="divide-y divide-gray-200">
+                  {col.collab_works.map((work: any, index: any) => (
+                    <li key={index} className="py-2">
+                      <Link
+                        className="items-center justify-between decoration-blue-800 font-medium"
+                        href={work.work_link}
+                      >
+                        {work.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {showButton ? (
               <CollabChange data={data} state={col.state} />
@@ -307,30 +317,34 @@ const CollabDetailsInfluencer = ({ data }: any) => {
                 </a>
               </span>
             </div>
-            <p className="leading-relaxed">Хийх ажлууд: {col.collab_detail}</p>
+            <p className="text-sm title-font text-gray-500 tracking-widest">
+              Хийх ажлууд:
+            </p>
+            <p>{col.collab_detail}</p>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">
                 Үнийн дүн : {col.collab_salary}
               </span>
             </div>
-            <div className="mt-4">
-              Хийгдсэн ажлууд:
-              <ul className="divide-y divide-gray-200">
-                {col.collab_works?.map((work: any, index: any) => (
-                  <li key={index} className="py-2">
-                    <div className=" items-center justify-between">
-                      <div>
-                        <h3 className="text-gray-800 font-medium">
-                          {work.name}
-                        </h3>
-                        <p className="text-gray-500">{work.work_link}</p>
-                      </div>
-                      {/* Add any action buttons here */}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {col.collab_works && col.collab_works.length > 0 && (
+              <div className="mt-4">
+                <p className="text-sm title-font text-gray-500 tracking-widest">
+                  Хийгдсэн ажлууд:
+                </p>
+                <ul className="divide-y divide-gray-200">
+                  {col.collab_works.map((work: any, index: any) => (
+                    <li key={index} className="py-2">
+                      <Link
+                        className="items-center justify-between decoration-blue-800 font-medium"
+                        href={work.work_link}
+                      >
+                        {work.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {showButton ? (
               <CollabChange data={data} state={col.state} />

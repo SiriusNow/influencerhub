@@ -80,7 +80,7 @@ const CollabChange = ({ data, state }: any) => {
         },
         body: JSON.stringify({
           id: col._id,
-          state: setText,
+          state: col.state,
           collab_detail: col.collab_detail,
           influencer_id: col.influencer_id,
           brand_id: col.brand_id,
@@ -150,7 +150,9 @@ const CollabChange = ({ data, state }: any) => {
     <div>
       {showWorkButton ? (
         <div className="grid gap-4 mb-8">
-          <span>Хийсэн ажлаа нэмэх</span>
+          <p className="text-sm title-font text-gray-500 tracking-widest">
+            Хийсэн ажлаа нэмэх
+          </p>
           <div>
             <label
               htmlFor="workName"
