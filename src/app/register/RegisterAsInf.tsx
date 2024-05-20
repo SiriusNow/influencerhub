@@ -21,18 +21,30 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
     email: "",
     social_link: "",
     service_id: "",
-    tag_id: "",
+    tag_id: [] as string[],
     password: "",
     password_confirmation: "",
   });
 
+  const handleCheckboxChange = (tagId: string) => {
+    setAuthState((prevState) => {
+      const { tag_id } = prevState;
+      if (tag_id.includes(tagId)) {
+        return { ...prevState, tag_id: tag_id.filter((id) => id !== tagId) };
+      } else if (tag_id.length < 3) {
+        return { ...prevState, tag_id: [...tag_id, tagId] };
+      } else {
+        return prevState; // Prevent adding more than 3 tags
+      }
+    });
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAuthState({ ...authState, [e.target.name]: e.target.value });
   };
-  const optionChnage = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedTagId = e.target.value;
-    setAuthState({ ...authState, tag_id: selectedTagId });
-  };
+  // const optionChnage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const selectedTagId = e.target.value;
+  //   setAuthState({ ...authState, tag_id: selectedTagId });
+  // };
   const optionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedTagId = e.target.value;
     setAuthState({ ...authState, service_id: selectedTagId });
@@ -154,26 +166,26 @@ export default function RegisterFormAsInfluencer({ services, tags }: any) {
             Таны хаяг аль бүлэгт хамаарах вэ
           </label>
           <div className="mt-2">
-            <select
-              className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-              id="tag_id"
-              name="tag_id"
-              onChange={optionChnage}
-              value={authState.tag_id}
-            >
-              <option className="text-base font-medium" value="">
-                бүлэг сонгох
-              </option>
-              {tags.map((tag: any) => (
-                <option
-                  className="text-base font-medium"
-                  key={tag._id}
+            <h2 className="text-base font-medium mb-2">Бүлэг сонгох</h2>
+            {tags.map((tag: any) => (
+              <div key={tag._id} className="flex items-center mb-2">
+                <input
+                  type="checkbox"
+                  id={tag._id}
+                  name="tag_ids"
                   value={tag._id}
+                  checked={authState.tag_id.includes(tag._id)}
+                  onChange={() => handleCheckboxChange(tag._id)}
+                  className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                />
+                <label
+                  htmlFor={tag._id}
+                  className="ml-2 text-sm font-medium text-gray-900"
                 >
                   {tag.name}
-                </option>
-              ))}
-            </select>
+                </label>
+              </div>
+            ))}
           </div>
         </div>
 

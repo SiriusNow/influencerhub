@@ -86,6 +86,7 @@ const CollabChange = ({ data, state }: any) => {
           brand_id: col.brand_id,
           payment_id: "",
           collab_works: works,
+          collab_salary: col.collab_salary,
         }),
       });
 
@@ -119,6 +120,7 @@ const CollabChange = ({ data, state }: any) => {
           influencer_id: col.influencer_id,
           brand_id: col.brand_id,
           collab_works: col.collab_works,
+          collab_salary: col.collab_salary,
           payment_id: "",
         }),
       });

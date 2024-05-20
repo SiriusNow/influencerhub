@@ -24,10 +24,7 @@ export default async function CollaborationLayout({
   // if (!session) redirect("/login");
   const tags = await getTags("");
   return (
-    <main className="flex flex-col md:flex-row gap-4">
-      <aside className="w-full md:w-[220px] shrink-0">
-        <SideNavbar tags={tags} />
-      </aside>
+    <main>
       <section className="flex-1">{children}</section>
     </main>
   );

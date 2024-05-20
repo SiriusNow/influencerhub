@@ -22,7 +22,6 @@ export async function POST(request: NextRequest) {
   //   const formData = await request.formData();
   // const data = await request.json();
   const { name, email, message } = await request.json();
-  console.log(name, email, message);
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -45,13 +44,13 @@ export async function POST(request: NextRequest) {
     });
 
     logger.info(`Sending mail to - ${email}`);
-    transporter.sendMail(mailOptions, (error: any, info: any) => {
-      if (error) {
-        logger.error(error);
-      } else {
-        logger.info("Email sent: " + info.response);
-      }
-    });
+    // transporter.sendMail(mailOptions, (error: any, info: any) => {
+    //   if (error) {
+    //     logger.error(error);
+    //   } else {
+    //     logger.info("Email sent: " + info.response);
+    //   }
+    // });
 
     return NextResponse.json({ message: "Success: email was sent" });
   } catch (error) {

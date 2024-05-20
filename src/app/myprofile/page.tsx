@@ -1,25 +1,49 @@
 import Link from "next/link";
+import Profile from "@/components/Profile";
+import ProfileBrand from "@/components/ProfileBrand";
+import { nextauthOptions } from "../api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Login | InfluencerHUB",
-  description: "Login page. Login to your account",
+  title: "Profile | InfluencerHUB",
+  description: "Profile, your account",
+};
+const url = process.env.API_URL!;
+
+const getUser = async (id: any): Promise<any> => {
+  const response = await fetch(`${url}/api/brands/${id}`, {
+    cache: "no-cache",
+  });
+  return await response.json();
+};
+const getServices = async (slug: string): Promise<any> => {
+  const response = await fetch(`${url}/api/services`, {
+    cache: "no-store",
+  });
+};
+const getTags = async (): Promise<any> => {
+  const response = await fetch(`${url}/api/tags`, {
+    cache: "no-store",
+  });
 };
 
-export default function LoginPage() {
-  return (
-    <section>
-      <div className="flex items-center justify-center px-4 py-16 sm:px-6 sm:py-8 lg:px-8 lg:py-16">
-        <div className="w-full sm:max-w-lg md:max-w-xl">
-          <h1>My profile</h1>
-          {/* <div className="flex justify-center mt-4">
-            <Link href={"/registerBrand"}>
-              <button className="mx-2 px-4 py-2 rounded-full bg-black text-white">
-                Login as Brand
-              </button>
-            </Link>
-          </div> */}
-        </div>
-      </div>
-    </section>
-  );
+export default async function LoginPage() {
+  const session = await getServerSession(nextauthOptions);
+  if (!session) {
+    redirect("/login");
+  }
+  const id = session?.user?.id;
+  const user = await getUser(id);
+  // const services = await getServices("s");
+  // const tags = await getTags();
+
+  if (!id) {
+    return <h1>Not found</h1>;
+  }
+
+  if (user && id) {
+    return <ProfileBrand brandId={id} />;
+  }
+  return <Profile userId={id} />;
 }

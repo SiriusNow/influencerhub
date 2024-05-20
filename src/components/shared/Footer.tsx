@@ -127,20 +127,20 @@ export default function Footer() {
               Тусламж
             </h2>
             <a
-              href="javascript:void(0)"
+              href="/privacy"
               className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
             >
               Хуулийн бодлого
             </a>
 
             <a
-              href="javascript:void(0)"
+              href="/privacy"
               className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
             >
-              Нууцлалийн бодлого
+              Нууцлалын бодлого
             </a>
             <a
-              href="javascript:void(0)"
+              href="/privacy"
               className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
             >
               Үйлчилгээний нөхцөл

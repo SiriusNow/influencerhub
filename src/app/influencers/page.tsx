@@ -69,10 +69,10 @@ export default async function Home({
     .map((_, index) => index + 1);
 
   return (
-    <section className="flex flex-col md:flex-row gap-2">
-      <aside className="w-full md:w-[220px] shrink-0">
+    <section>
+      {/* <aside className="w-full md:w-[220px] shrink-0">
         <SideNavbar tags={tags} />
-      </aside>
+      </aside> */}
       <div className="flex-1 py-2">
         <h2 className="capitalize mb-4">Бүх Нөлөөлөгчид</h2>
         <div className="grid gap-2 mb-4 lg:mb-4 md:grid-cols-2">
